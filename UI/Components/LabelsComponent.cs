@@ -185,6 +185,13 @@ namespace LiveSplit.UI.Components
                         label.Text = comparison.Substring(7);
                     else
                         label.Text = CompositeComparisons.GetShortComparisonName(comparison);
+                    var g = Graphics.FromImage(new Bitmap(100, 100));
+                    label.SetActualWidth(g);
+                    while (label.ActualWidth >= label.Width && !string.IsNullOrEmpty(label.Text))
+                    {
+                        label.Text = label.Text.Remove(label.Text.Length - 1, 1);
+                        label.SetActualWidth(g);
+                    }
                 }
                 else
                     label.Text = column.Name;
